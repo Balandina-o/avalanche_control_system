@@ -4,16 +4,35 @@ import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChartComponent from "./ChartComponent";
 
-const NavBar = observer(() => {
+const OperationPanel = observer(() => {
   const [currentState, setcurrentState] = useState(false);
+
+  const [period, setPeriod] = useState("500");
+  const [firstValue, setFirstValue] = useState("10");
+  const [secondValue, setSecondValue] = useState("12");
 
   function trigger() {
     setcurrentState(true);
+    setFirstValue(1);
+    setSecondValue(30);
+    setPeriod(100);
   }
 
   function peace() {
     setcurrentState(false);
+    setFirstValue(10);
+    setSecondValue(12);
+    setPeriod(500);
   }
+
+  function stop() {
+    setcurrentState(false);
+    setFirstValue(0);
+    setSecondValue(0);
+    setPeriod(499);
+  }
+
+  function exit() {}
 
   return (
     <div class="main_div d-flex flex-row">
@@ -37,12 +56,12 @@ const NavBar = observer(() => {
                   </button>
                 </li>
                 <li class="nav-item text-white fs-4 mt-2">
-                  <button type="button" class="btn btn-light" onClick={peace}>
+                  <button type="button" class="btn btn-light" onClick={stop}>
                     Приостановить
                   </button>
                 </li>
                 <li class="nav-item text-white fs-4 mt-5">
-                  <button type="button" class="btn btn-light" onClick={peace}>
+                  <button type="button" class="btn btn-light" onClick={exit}>
                     Выход из СРВ
                   </button>
                 </li>
@@ -68,10 +87,14 @@ const NavBar = observer(() => {
         )}
       </div>
       <div>
-        <ChartComponent />
+        <ChartComponent
+          period={period}
+          firstValue={firstValue}
+          secondValue={secondValue}
+        />
       </div>
     </div>
   );
 });
 
-export default NavBar;
+export default OperationPanel;

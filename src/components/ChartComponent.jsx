@@ -7,26 +7,33 @@ const startingNumbers = Array(count)
   .fill(1)
   .map((_, i) => i);
 
-export default function ChartComponent() {
+export default function ChartComponent(props) {
   const [data, setData] = React.useState({
     x: startingNumbers,
     y: startingNumbers,
   });
 
   React.useEffect(() => {
+    //alert("sec " + props.period + props.firstValue + props.secondValue);
     const interval = setInterval(() => {
       setData((prev) => {
         return {
           x: prev.x,
-          y: [...prev.y.slice(1), Math.floor(Math.random() * (10 - 12) + 10)],
+          y: [
+            ...prev.y.slice(1),
+            Math.floor(
+              Math.random() * (props.secondValue - props.firstValue) +
+                props.secondValue
+            ),
+          ],
         };
       });
-    }, 500);
+    }, props.period);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [props.period]);
 
   return (
     <div>
