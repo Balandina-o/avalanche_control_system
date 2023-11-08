@@ -7,7 +7,7 @@ const LogoBar = () => {
         <a class="navbar-brand" href="/">
           <img
             src={require("../icons/logo.png")}
-            height="40"
+            height="50"
             alt="UUST logo"
             loading="lazy"
           />

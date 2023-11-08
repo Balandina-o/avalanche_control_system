@@ -1,7 +1,7 @@
 import React from "react";
 import Plot from "react-plotly.js";
 
-const count = 30;
+const count = 50;
 
 const startingNumbers = Array(count)
   .fill(1)
@@ -18,10 +18,10 @@ export default function ChartComponent() {
       setData((prev) => {
         return {
           x: prev.x,
-          y: [...prev.y.slice(1), Math.floor(Math.random() * count)],
+          y: [...prev.y.slice(1), Math.floor(Math.random() * (10 - 12) + 10)],
         };
       });
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
@@ -34,8 +34,8 @@ export default function ChartComponent() {
         data={[data]}
         layout={{
           title: "Real-time Data App",
-          xaxis: { range: [-5, count] },
-          yaxis: { range: [-5, count] },
+          xaxis: { range: [-2, count] },
+          yaxis: { range: [-2, count] },
         }}
       />
     </div>
