@@ -29,6 +29,17 @@ const OperationPanel = observer(() => {
     setBar(100);
     setTemp(Math.floor(Math.random() * -10));
   }
+  function avalanche() {
+    //
+    //
+    //
+    setcurrentState(true);
+    setFirstValue(1);
+    setSecondValue(30);
+    setPeriod(100);
+    setBar(100);
+    setTemp(Math.floor(Math.random() * -10));
+  }
 
   function peace() {
     setcurrentState(false);
@@ -62,6 +73,15 @@ const OperationPanel = observer(() => {
                     onClick={trigger}
                   >
                     Критические значения
+                  </button>
+                </li>
+                <li class="nav-item text-white mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={avalanche}
+                  >
+                    Лавина не контр.
                   </button>
                 </li>
                 <li class="nav-item text-white fs-4 mt-2">
