@@ -1,7 +1,8 @@
 import React from "react";
 import Plot from "react-plotly.js";
 
-const count = 50;
+const count = 100;
+const count2 = 150;
 
 const startingNumbers = Array(count)
   .fill(1)
@@ -13,8 +14,10 @@ export default function ChartComponent(props) {
     y: startingNumbers,
   });
 
+  const [data2, setData2] = React.useState({});
+  const [data3, setData3] = React.useState({});
+
   React.useEffect(() => {
-    //alert("sec " + props.period + props.firstValue + props.secondValue);
     const interval = setInterval(() => {
       setData((prev) => {
         return {
@@ -28,6 +31,13 @@ export default function ChartComponent(props) {
           ],
         };
       });
+
+      setData2(
+        Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
+      );
+      setData3(
+        Array.from({ length: 100 }, () => Math.floor(Math.random() * props.bar))
+      );
     }, props.period);
 
     return () => {
@@ -40,9 +50,25 @@ export default function ChartComponent(props) {
       <Plot
         data={[data]}
         layout={{
-          title: "Real-time Data App",
+          showlegend: true,
+
+          title: "Влажность, %",
+          xaxis: { range: [-2, 60], title: "ms.т" }, //visible: false
+          yaxis: { range: [-2, count], title: "%" },
+        }}
+      />
+      <Plot
+        data={[
+          {
+            type: "bar",
+            x: data2,
+            y: data3,
+          },
+        ]}
+        layout={{
+          title: "Real-time Data",
           xaxis: { range: [-2, count] },
-          yaxis: { range: [-2, count] },
+          yaxis: { range: [-2, count2] },
         }}
       />
     </div>

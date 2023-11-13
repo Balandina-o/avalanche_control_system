@@ -2,7 +2,7 @@ import React from "react";
 
 const LogoBar = () => {
   return (
-    <nav class="navbar navbar-light bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="custom-container d-flex align-items-center">
         <a class="navbar-brand" href="/">
           <img
