@@ -26,7 +26,7 @@ const EconomicModal = ({ show, onClose, rashody }) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Расчет экономической эффективности</Modal.Title>
+          <Modal.Title>Расчет экономических затрат</Modal.Title>
         </Modal.Header>
         <div class="ml-3">Тариф: 0.15 руб./мин.</div>
         <Modal.Body>

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Plot from "react-plotly.js";
 
-const count = 100;
+const count = 500;
 
 const startingNumbers = Array(count)
   .fill(1)
@@ -21,8 +21,7 @@ export default function PressureChart(props) {
           y: [
             ...prev.y.slice(1),
             Math.floor(
-              Math.random() * (props.secondValue - props.firstValue) +
-                props.firstValue
+              Math.random() * (props.massMax - props.massMin) + props.massMin
             ),
           ],
         };
@@ -32,7 +31,7 @@ export default function PressureChart(props) {
     return () => {
       clearInterval(interval);
     };
-  }, [props.firstValue, props.period]);
+  }, [props.massMax, props.period]);
 
   return (
     <div>
@@ -43,13 +42,13 @@ export default function PressureChart(props) {
           width: 600,
           height: 350,
           title: "График: динамика изменения давления снежного пласта, Па.",
-          xaxis: { range: [-2, 120], title: "s.", visible: false }, //visible: false
-          yaxis: { range: [-2, count], title: "Па." },
+          xaxis: { range: [-2, 600], title: "s.", visible: false }, //visible: false
+          yaxis: { range: [-2, count], title: "КПа." },
         }}
       />
       <div class="display-flex flex-direction row ml-5">
         <div>
-          <label for="name">Давление пласта, Па.:</label>
+          <label for="name">Давление пласта, КПа.:</label>
           <input
             type="text"
             id="name"
@@ -59,10 +58,15 @@ export default function PressureChart(props) {
             maxlength="8"
             size="1"
             value={
-              props.onOrOff ? Math.round(Math.random() * (500 - 100 + 100)) : 0
+              props.onOrOff
+                ? Math.floor(
+                    Math.random() * (props.massMax - props.massMin) +
+                      props.massMin
+                  )
+                : 0
             }
           />
-          <label for="name">Пложащь пласта, м.:</label>
+          <label for="name">Площадь пласта, м.:</label>
           <input
             type="text"
             id="name"

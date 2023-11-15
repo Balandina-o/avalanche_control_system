@@ -25,6 +25,9 @@ const OperationPanel = observer(() => {
 
   const [timeAA, setTimeAA] = useState(0);
 
+  const [massMin, setMassMin] = useState(0);
+  const [massMax, setMassMax] = useState(0);
+
   function trigger() {
     setShowCreateAvalancheModal(true);
     setFirstValue(25);
@@ -35,6 +38,9 @@ const OperationPanel = observer(() => {
     setBarMin(5);
     setBarMax(25);
     setTemp(Math.floor(Math.random() * (1 + 3) - 3));
+
+    setMassMin(250);
+    setMassMax(300);
   }
   function avalanche() {
     setFirstValue(50);
@@ -45,6 +51,9 @@ const OperationPanel = observer(() => {
     setBarMin(100);
     setBarMax(150);
     setTemp(Math.floor(Math.random() * (1 + 3) - 3));
+
+    setMassMin(250);
+    setMassMax(500);
   }
 
   function peace() {
@@ -56,11 +65,17 @@ const OperationPanel = observer(() => {
     setBarMin(1);
     setBarMax(5);
     setTemp(-1 * Math.floor(Math.random() * (30 - 10) + 10));
+
+    setMassMin(150);
+    setMassMax(200);
   }
 
   function stop() {
     setFirstValue(0);
     setSecondValue(0);
+
+    setMassMin(0);
+    setMassMax(0);
     setonOrOff(false);
   }
 
@@ -192,6 +207,8 @@ const OperationPanel = observer(() => {
               barMin={barMin}
               barMax={barMax}
               onOrOff={onOrOff}
+              massMin={massMin}
+              massMax={massMax}
             />
           </div>
         </div>
@@ -205,6 +222,8 @@ const OperationPanel = observer(() => {
           barMin={barMin}
           barMax={barMax}
           onOrOff={onOrOff}
+          massMin={massMin}
+          massMax={massMax}
         />
       </div>
       <div>

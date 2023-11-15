@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Plot from "react-plotly.js";
 
 const count = 100;
@@ -14,6 +14,8 @@ export default function ChartComponent(props) {
     y: startingNumbers,
   });
 
+
+  const [massPlast, setMassPlast] = useState(0);
   const [data2, setData2] = React.useState({});
   const [data3, setData3] = React.useState({});
 
@@ -32,6 +34,8 @@ export default function ChartComponent(props) {
         };
       });
 
+    
+
       setData2(
         props.onOrOff
           ? Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
@@ -46,6 +50,8 @@ export default function ChartComponent(props) {
             )
           : 0
       );
+
+      setMassPlast(Math.round(Math.random() * (500 - 100 + 100)));
     }, props.period);
 
     return () => {
@@ -95,7 +101,12 @@ export default function ChartComponent(props) {
             maxlength="8"
             size="1"
             value={
-              props.onOrOff ? Math.round(Math.random() * (500 - 100 + 100)) : 0
+              props.onOrOff
+                ? Math.floor(
+                    Math.random() * (props.massMax - props.massMin) +
+                      props.massMin
+                  )
+                : 0
             }
           />
         </div>
