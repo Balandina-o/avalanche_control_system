@@ -7,14 +7,11 @@ const startingNumbers = Array(count)
   .fill(1)
   .map((_, i) => i);
 
-export default function ChartComponent(props) {
+export default function PressureChart(props) {
   const [data, setData] = React.useState({
     x: startingNumbers,
     y: startingNumbers,
   });
-
-  const [data2, setData2] = React.useState({});
-  const [data3, setData3] = React.useState({});
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -25,24 +22,17 @@ export default function ChartComponent(props) {
             ...prev.y.slice(1),
             Math.floor(
               Math.random() * (props.secondValue - props.firstValue) +
-                props.secondValue
+                props.firstValue
             ),
           ],
         };
       });
-
-      setData2(
-        Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
-      );
-      setData3(
-        Array.from({ length: 100 }, () => Math.floor(Math.random() * props.bar))
-      );
     }, props.period);
 
     return () => {
       clearInterval(interval);
     };
-  }, [props.period]);
+  }, [props.firstValue, props.period]);
 
   return (
     <div>
@@ -51,15 +41,15 @@ export default function ChartComponent(props) {
         layout={{
           showlegend: false,
           width: 600,
-          height: 400,
-          title: "График: динамика изменения давления снежного пласта, Па",
-          xaxis: { range: [-2, 60], title: "s." }, //visible: false
-          yaxis: { range: [-2, count], title: "%" },
+          height: 350,
+          title: "График: динамика изменения давления снежного пласта, Па.",
+          xaxis: { range: [-2, 120], title: "s.", visible: false }, //visible: false
+          yaxis: { range: [-2, count], title: "Па." },
         }}
       />
-      <div class="display-flex flex-direction row ml-4">
-        <div class="display-flex">
-          <label for="name">Текущее давление, Па.:</label>
+      <div class="display-flex flex-direction row ml-5">
+        <div>
+          <label for="name">Давление пласта, Па.:</label>
           <input
             type="text"
             id="name"
@@ -68,11 +58,11 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={Math.random() * 100}
+            value={
+              props.onOrOff ? Math.round(Math.random() * (500 - 100 + 100)) : 0
+            }
           />
-        </div>
-        <div class="display-flex">
-          <label for="name">Площадь охвата, км.:</label>
+          <label for="name">Пложащь пласта, м.:</label>
           <input
             type="text"
             id="name"
@@ -81,9 +71,22 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value="1000"
+            value={props.onOrOff ? 1000 : 0}
           />
         </div>
+      </div>
+      <div class="ml-5">
+        <label for="name">Период отслеживания, ms.:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          minlength="4"
+          maxlength="8"
+          size="1"
+          value={props.onOrOff ? props.period : 0}
+        />
       </div>
     </div>
   );

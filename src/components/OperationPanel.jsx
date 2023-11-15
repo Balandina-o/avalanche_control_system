@@ -9,11 +9,16 @@ import PressureChart from "./PressureChart";
 import TimeMaster from "./TimeMaster";
 
 const OperationPanel = observer(() => {
+  const [onOrOff, setonOrOff] = useState("true");
+
   const [period, setPeriod] = useState("500");
   const [firstValue, setFirstValue] = useState("10");
   const [secondValue, setSecondValue] = useState("12");
-  const [bar, setBar] = useState("10");
+  const [barMin, setBarMin] = useState("5");
+  const [barMax, setBarMax] = useState("15");
   const [temp, setTemp] = useState("0");
+
+  const [rashody, setRashody] = useState("0");
 
   const [showCreateEconomicModal, setShowCreateEconomicModal] = useState();
   const [showCreateAvalancheModal, setShowCreateAvalancheModal] = useState();
@@ -24,29 +29,39 @@ const OperationPanel = observer(() => {
     setShowCreateAvalancheModal(true);
     setFirstValue(25);
     setSecondValue(15);
+    setonOrOff(true);
 
-    setBar(20);
+    setRashody(0);
+    setBarMin(5);
+    setBarMax(25);
     setTemp(Math.floor(Math.random() * (1 + 3) - 3));
   }
   function avalanche() {
     setFirstValue(50);
     setSecondValue(20);
+    setonOrOff(true);
 
-    setBar(100);
+    setRashody(100000);
+    setBarMin(100);
+    setBarMax(150);
     setTemp(Math.floor(Math.random() * (1 + 3) - 3));
   }
 
   function peace() {
     setFirstValue(15);
     setSecondValue(5);
+    setonOrOff(true);
 
-    setBar(5);
+    setRashody(0);
+    setBarMin(1);
+    setBarMax(5);
     setTemp(-1 * Math.floor(Math.random() * (30 - 10) + 10));
   }
 
   function stop() {
     setFirstValue(0);
     setSecondValue(0);
+    setonOrOff(false);
   }
 
   function faster() {
@@ -148,7 +163,7 @@ const OperationPanel = observer(() => {
                     minlength="4"
                     maxlength="8"
                     size="10"
-                    value={temp + 4}
+                    value={onOrOff ? temp + 4 : 0}
                   />
                 </div>
 
@@ -165,7 +180,7 @@ const OperationPanel = observer(() => {
                     minlength="4"
                     maxlength="8"
                     size="10"
-                    value={temp}
+                    value={onOrOff ? temp : 0}
                   />
                 </div>
               </div>
@@ -174,7 +189,9 @@ const OperationPanel = observer(() => {
               period={period}
               firstValue={firstValue}
               secondValue={secondValue}
-              bar={bar}
+              barMin={barMin}
+              barMax={barMax}
+              onOrOff={onOrOff}
             />
           </div>
         </div>
@@ -185,13 +202,16 @@ const OperationPanel = observer(() => {
           period={period}
           firstValue={firstValue}
           secondValue={secondValue}
-          bar={bar}
+          barMin={barMin}
+          barMax={barMax}
+          onOrOff={onOrOff}
         />
       </div>
       <div>
         <EconomicModal
           show={showCreateEconomicModal}
           onClose={() => setShowCreateEconomicModal(false)}
+          rashody={rashody}
         >
           {" "}
         </EconomicModal>

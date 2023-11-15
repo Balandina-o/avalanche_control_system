@@ -33,10 +33,18 @@ export default function ChartComponent(props) {
       });
 
       setData2(
-        Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
+        props.onOrOff
+          ? Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
+          : 0
       );
       setData3(
-        Array.from({ length: 100 }, () => Math.floor(Math.random() * props.bar))
+        props.onOrOff
+          ? Array.from({ length: 100 }, () =>
+              Math.floor(
+                Math.random() * (props.barMax - props.barMin + 1) + props.barMin
+              )
+            )
+          : 0
       );
     }, props.period);
 
@@ -52,7 +60,7 @@ export default function ChartComponent(props) {
         layout={{
           showlegend: false,
           width: 600,
-          height: 400,
+          height: 350,
           title: "График: динамика изменения влажности, %",
           xaxis: { range: [-2, 120], title: "s.", visible: false }, //visible: false
           yaxis: { range: [-2, count], title: "%" },
@@ -69,7 +77,11 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={Math.round(Math.random() * (800 - 200 + 1)) / 100}
+            value={
+              props.onOrOff
+                ? Math.round(Math.random() * (800 - 200 + 1)) / 100
+                : 0
+            }
           />
         </div>
         <div>
@@ -82,7 +94,9 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={Math.round(Math.random() * (500 - 100 + 100))}
+            value={
+              props.onOrOff ? Math.round(Math.random() * (500 - 100 + 100)) : 0
+            }
           />
         </div>
 
@@ -96,7 +110,23 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={data.y}
+            value={Math.floor(
+              Math.random() * (props.secondValue - props.firstValue) +
+                props.firstValue
+            )}
+          />
+        </div>
+        <div>
+          <label for="name">Период отслеживания, ms.:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            minlength="4"
+            maxlength="8"
+            size="1"
+            value={props.onOrOff ? props.period : 0}
           />
         </div>
       </div>
@@ -110,25 +140,49 @@ export default function ChartComponent(props) {
         ]}
         layout={{
           width: 600,
-          height: 300,
+          height: 250,
 
           title: "Визуализация данных шумомера, Дб.",
           xaxis: { range: [-2, count], visible: false },
           yaxis: { range: [-2, count2], title: "Дб." },
         }}
       />
-      <div>
-        <label for="name">Уровень звука, Дб:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          minlength="4"
-          maxlength="8"
-          size="1"
-          value={Math.round(Math.random() * (180 - 100) + 100)}
-        />
+      <div class="display-flex flex-direction row">
+        <div>
+          <label for="name">Уровень звука, Дб:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            minlength="4"
+            maxlength="8"
+            size="1"
+            value={
+              props.onOrOff
+                ? Math.floor(
+                    Math.round(
+                      Math.random() * (props.barMax - props.barMin) +
+                        props.barMin
+                    )
+                  )
+                : 0
+            }
+          />
+        </div>
+        <div>
+          <label for="name">Период отслеживания, ms.:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            minlength="4"
+            maxlength="8"
+            size="1"
+            value={props.onOrOff ? props.period : 0}
+          />
+        </div>
       </div>
     </div>
   );
