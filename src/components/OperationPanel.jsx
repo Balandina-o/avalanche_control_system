@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChartComponent from "./ChartComponent";
 import EconomicModal from "./EconomicModal";
 import AvalancheModal from "./AvalancheModal";
+import PressureChart from "./PressureChart";
+import TimeMaster from "./TimeMaster";
 
 const OperationPanel = observer(() => {
-  const [currentState, setcurrentState] = useState(false);
-
   const [period, setPeriod] = useState("500");
   const [firstValue, setFirstValue] = useState("10");
   const [secondValue, setSecondValue] = useState("12");
@@ -17,53 +16,56 @@ const OperationPanel = observer(() => {
   const [temp, setTemp] = useState("0");
 
   const [showCreateEconomicModal, setShowCreateEconomicModal] = useState();
-
   const [showCreateAvalancheModal, setShowCreateAvalancheModal] = useState();
+
+  const [timeAA, setTimeAA] = useState(0);
 
   function trigger() {
     setShowCreateAvalancheModal(true);
-    setcurrentState(true);
-    setFirstValue(1);
-    setSecondValue(30);
-    setPeriod(100);
-    setBar(100);
-    setTemp(Math.floor(Math.random() * -10));
+    setFirstValue(25);
+    setSecondValue(15);
+
+    setBar(20);
+    setTemp(Math.floor(Math.random() * (1 + 3) - 3));
   }
   function avalanche() {
-    //
-    //
-    //
-    setcurrentState(true);
-    setFirstValue(1);
-    setSecondValue(30);
-    setPeriod(100);
+    setFirstValue(50);
+    setSecondValue(20);
+
     setBar(100);
-    setTemp(Math.floor(Math.random() * -10));
+    setTemp(Math.floor(Math.random() * (1 + 3) - 3));
   }
 
   function peace() {
-    setcurrentState(false);
-    setFirstValue(10);
-    setSecondValue(12);
-    setPeriod(500);
-    setBar(10);
-    setTemp(0);
+    setFirstValue(15);
+    setSecondValue(5);
+
+    setBar(5);
+    setTemp(-1 * Math.floor(Math.random() * (30 - 10) + 10));
   }
 
   function stop() {
-    setcurrentState(false);
     setFirstValue(0);
     setSecondValue(0);
-    setPeriod(499);
   }
 
-  function exit() {}
+  function faster() {
+    setPeriod(period - 100);
+  }
+
+  function slower() {
+    setPeriod(period + 100);
+  }
+
+  function childCallback(data) {
+    console.log("Данные от дочернего компонента:", data);
+  }
 
   return (
-    <div class="main_div d-flex flex-row">
-      <div className="container-fluid">
-        <div className="row flex no-wrap">
-          <div className="bg-secondary col-auto col-md-4 min-vh-100">
+    <div class="main_div d-flex flex-row ">
+      <div className="container-fluid h-100">
+        <div class="row flex no-wrap">
+          <div className="bg-secondary col-auto col-md-3 min-vh-100">
             <ul class="nav nav-pills flex-column">
               <div class="col text-center mt-5">
                 <li class="nav-item text-white fs-4">
@@ -89,21 +91,32 @@ const OperationPanel = observer(() => {
                     Нормальное состояние
                   </button>
                 </li>
-                <li class="nav-item text-white fs-4 mt-2">
-                  <button type="button" class="btn btn-light" onClick={stop}>
-                    Приостановить
-                  </button>
-                </li>
-                <li class="nav-item text-white fs-4 mt-4">
-                  <button type="button" class="btn btn-light" onClick={stop}>
-                    Частотa отслеж. +
-                  </button>
-                </li>
-                <li class="nav-item text-white fs-4 mt-2">
-                  <button type="button" class="btn btn-light" onClick={stop}>
-                    Частотa отслеж. -
-                  </button>
-                </li>
+                <div>
+                  <li class="nav-item text-white fs-4 mt-4">
+                    <button type="button" class="btn btn-light" onClick={stop}>
+                      Приостановить
+                    </button>
+                  </li>
+                  <li class="nav-item text-white fs-4 mt-2">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      onClick={faster}
+                    >
+                      Частотa отслеж. +
+                    </button>
+                  </li>
+                  <li class="nav-item text-white fs-4 mt-2">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      onClick={slower}
+                    >
+                      Частотa отслеж. -
+                    </button>
+                  </li>
+                </div>
+
                 <li class="nav-item text-white fs-4 mt-5">
                   <button
                     type="button"
@@ -116,28 +129,57 @@ const OperationPanel = observer(() => {
               </div>
             </ul>
           </div>
-          <div class="">
-            dfdfdfdfdfddddddddddddddddddddddddddddddddddddddddddddddd
+          <div class="temp">
+            <div class="abys">
+              <div>
+                <TimeMaster childCallback={() => childCallback()} />
+              </div>
+              <div>
+                <div class="pl-5 pt-4">
+                  <label for="name">
+                    Температура <b>воздуха</b>, С :
+                  </label>
+                  <br></br>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    minlength="4"
+                    maxlength="8"
+                    size="10"
+                    value={temp + 4}
+                  />
+                </div>
+
+                <div class="pl-5">
+                  <label for="name">
+                    Температура <b>снега</b>, С :
+                  </label>
+                  <br></br>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    minlength="4"
+                    maxlength="8"
+                    size="10"
+                    value={temp}
+                  />
+                </div>
+              </div>
+            </div>
+            <PressureChart
+              period={period}
+              firstValue={firstValue}
+              secondValue={secondValue}
+              bar={bar}
+            />
           </div>
         </div>
       </div>
 
-      <div>
-        {/* {currentState ? (
-          <img
-            width="500px"
-            //src={require("../icons/111.gif")}
-            class="mt-2"
-          ></img>
-        ) : (
-          <img
-            width="500px"
-            src={require("../icons/222.gif")}
-            class="mt-2"
-          ></img>
-        )} */}
-        {temp}
-      </div>
       <div>
         <ChartComponent
           period={period}

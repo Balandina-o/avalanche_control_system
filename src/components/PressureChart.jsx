@@ -2,7 +2,6 @@ import React from "react";
 import Plot from "react-plotly.js";
 
 const count = 100;
-const count2 = 150;
 
 const startingNumbers = Array(count)
   .fill(1)
@@ -26,7 +25,7 @@ export default function ChartComponent(props) {
             ...prev.y.slice(1),
             Math.floor(
               Math.random() * (props.secondValue - props.firstValue) +
-                props.firstValue
+                props.secondValue
             ),
           ],
         };
@@ -43,7 +42,7 @@ export default function ChartComponent(props) {
     return () => {
       clearInterval(interval);
     };
-  }, [props.firstValue, props.period]);
+  }, [props.period]);
 
   return (
     <div>
@@ -53,14 +52,14 @@ export default function ChartComponent(props) {
           showlegend: false,
           width: 600,
           height: 400,
-          title: "График: динамика изменения влажности, %",
-          xaxis: { range: [-2, 120], title: "s.", visible: false }, //visible: false
+          title: "График: динамика изменения давления снежного пласта, Па",
+          xaxis: { range: [-2, 60], title: "s." }, //visible: false
           yaxis: { range: [-2, count], title: "%" },
         }}
       />
-      <div class="display-flex flex-direction row">
+      <div class="display-flex flex-direction row ml-4">
         <div class="display-flex">
-          <label for="name">Масса влаги, т.:</label>
+          <label for="name">Текущее давление, Па.:</label>
           <input
             type="text"
             id="name"
@@ -69,11 +68,11 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={Math.round(Math.random() * (800 - 200 + 1)) / 100}
+            value={Math.random() * 100}
           />
         </div>
-        <div>
-          <label for="name">Масса пласта, т.:</label>
+        <div class="display-flex">
+          <label for="name">Площадь охвата, км.:</label>
           <input
             type="text"
             id="name"
@@ -82,53 +81,9 @@ export default function ChartComponent(props) {
             minlength="4"
             maxlength="8"
             size="1"
-            value={Math.round(Math.random() * (500 - 100 + 100))}
+            value="1000"
           />
         </div>
-
-        <div>
-          <label for="name">Влажность, %:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            minlength="4"
-            maxlength="8"
-            size="1"
-            value={data.y}
-          />
-        </div>
-      </div>
-      <Plot
-        data={[
-          {
-            type: "bar",
-            x: data2,
-            y: data3,
-          },
-        ]}
-        layout={{
-          width: 600,
-          height: 300,
-
-          title: "Визуализация данных шумомера, Дб.",
-          xaxis: { range: [-2, count], visible: false },
-          yaxis: { range: [-2, count2], title: "Дб." },
-        }}
-      />
-      <div>
-        <label for="name">Уровень звука, Дб:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          minlength="4"
-          maxlength="8"
-          size="1"
-          value={Math.round(Math.random() * (180 - 100) + 100)}
-        />
       </div>
     </div>
   );

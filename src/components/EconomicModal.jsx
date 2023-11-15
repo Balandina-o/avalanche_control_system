@@ -16,15 +16,46 @@ const EconomicModal = ({ show, onClose }) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Расчет экономической эффективности СРВ:</Modal.Title>
+          <Modal.Title>Расчет экономической эффективности</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          Выполнить расчет текущих затрат на эксплуатацию СРВ:
+          <Form>
+            <Form.Control
+              type="text"
+              placeholder="Расходы на электричество"
+              className="mt-3"
+            />
+            <Form.Control
+              type="text"
+              placeholder="Описание теста"
+              className="mt-3"
+            />
+            <Form.Control
+              type="text"
+              placeholder="Расходы на ремонт оборудования"
+              className="mt-3"
+              value={"10000"}
+            />
+            <hr></hr>
+            <hr></hr>
+            <hr></hr>
+            Результат вычислений:
+            <input
+              class="form-control"
+              id="disabledInput"
+              type="text"
+              placeholder="Результат вычислений"
+              disabled
+            />
+          </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => onClose()}>
-            Close
+            Выход из калькулятора
           </Button>
           <Button variant="primary" onClick={() => onClose()}>
-            Save Changes
+            Выполнить расчет
           </Button>
         </Modal.Footer>
       </Modal>

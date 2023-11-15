@@ -26,8 +26,8 @@ const AvalancheModal = ({ show, onClose }) => {
           </Modal.Header>
           <Modal.Body>
             Рекомендуется немедленно произвести запланированный подрыв снежного
-            пласта! Нажатие на кнопку запустит процесс оповещения граждан и
-            пошлет сигнал городским службам
+            пласта! <br></br>Нажатие на кнопку запустит процесс оповещения
+            граждан и пошлет сигнал городским службам
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={() => onClose()}>
@@ -53,6 +53,7 @@ const AvalancheModal = ({ show, onClose }) => {
             <div class="spinner-border text-info" role="status">
               <span class="visually-hidden"></span>
             </div>
+            <div>Отправка сообщений...</div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={handleClose}>
