@@ -101,7 +101,7 @@ const OperationPanel = observer(() => {
   }
 
   function please() {
-    setTimeout(peace, 9000);
+    setTimeout(peace, 10000);
   }
 
   function peace() {
@@ -162,7 +162,7 @@ const OperationPanel = observer(() => {
     setonOrOff(false);
     setYagami(1);
 
-    setPriceMass((current) => [...current, 1]);
+    setPeriodTimeMass((current) => [...current, 1]);
 
     setShowCreateYagamiLightModal(true);
   }
@@ -430,7 +430,7 @@ const OperationPanel = observer(() => {
           show={showCreateYagamiLightModal}
           onClose={() => setShowCreateYagamiLightModal(false)}
           please={please}
-          priceMass={priceMass}
+          periodTimeMass={periodTimeMass}
         >
           {" "}
         </YagamiLightModal>

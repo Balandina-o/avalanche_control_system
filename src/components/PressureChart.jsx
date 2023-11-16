@@ -20,9 +20,12 @@ export default function PressureChart(props) {
           x: prev.x,
           y: [
             ...prev.y.slice(1),
-            Math.floor(
-              Math.random() * (props.massMax - props.massMin) + props.massMin
-            ),
+            props.onOrOff && props.onOrOff1
+              ? Math.floor(
+                  Math.random() * (props.massMax - props.massMin) +
+                    props.massMin
+                )
+              : 0,
           ],
         };
       });

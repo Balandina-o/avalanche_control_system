@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const YagamiLightModal = ({ show, onClose, please, priceMass }) => {
+const YagamiLightModal = ({ show, onClose, please, periodTimeMass }) => {
   function checkStateChange(interval) {
     please();
     onClose();
@@ -17,7 +17,7 @@ const YagamiLightModal = ({ show, onClose, please, priceMass }) => {
       checkStateChange(interval);
       clearInterval(interval);
     }, 5000);
-  }, [priceMass.length]);
+  }, [periodTimeMass.length]);
 
   return (
     <div>
