@@ -4,16 +4,23 @@ import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css_components/EconomicModal.module.css";
 
-const EconomicModal = ({ show, onClose, rashody }) => {
+const EconomicModal = ({ show, onClose, rashody, price, priceMass }) => {
   const [resu, setresu] = useState(0);
   const [time, setTime] = useState(0);
   const [dop, setDop] = useState(0);
 
+  const [sum, setSum] = useState(0);
+
   const [energy, setEnergy] = useState(0);
+
+  React.useEffect(() => {
+    setSum(priceMass.reduce((partialSum, a) => partialSum + a, 0));
+    //alert(sum);
+  }, [priceMass]);
 
   function count() {
     let tarif = 0.15;
-    setresu(Number(time) * tarif + Number(rashody) + Number(dop));
+    setresu(Number(time) * tarif + Number(rashody) + Number(sum));
 
     setEnergy(Number(time) * tarif);
   }
@@ -48,7 +55,9 @@ const EconomicModal = ({ show, onClose, rashody }) => {
               />
             </div>
             <div class="bruh" style={{ display: "flex" }}>
-              <label for="name">Расходы на ремонт оборудования, руб.</label>
+              <label for="name">
+                Расходы на ремонт оборудования из-за схода лавины, руб.
+              </label>
               <Form.Control
                 type="text"
                 placeholder="Расходы на ремонт оборудования, руб."
@@ -57,13 +66,15 @@ const EconomicModal = ({ show, onClose, rashody }) => {
               />
             </div>
             <div class="bruh" style={{ display: "flex" }}>
-              <label for="name">Дополнительные затраты, руб.</label>
+              <label for="name">
+                Расходы на починку вышедних из строя в ходе эксплуатации
+                датчиков, руб.
+              </label>
               <Form.Control
                 type="text"
                 placeholder="Дополнительные затраты, руб."
                 className="mt-3"
-                value={dop}
-                onChange={(event) => setDop(event.target.value)}
+                value={sum}
               />
             </div>
             <hr></hr>

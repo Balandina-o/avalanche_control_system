@@ -14,7 +14,6 @@ export default function ChartComponent(props) {
     y: startingNumbers,
   });
 
-
   const [massPlast, setMassPlast] = useState(0);
   const [data2, setData2] = React.useState({});
   const [data3, setData3] = React.useState({});
@@ -34,15 +33,13 @@ export default function ChartComponent(props) {
         };
       });
 
-    
-
       setData2(
-        props.onOrOff
+        props.onOrOff && props.onOrOff3
           ? Array.from({ length: 100 }, () => Math.floor(Math.random() * 100))
           : 0
       );
       setData3(
-        props.onOrOff
+        props.onOrOff && props.onOrOff3
           ? Array.from({ length: 100 }, () =>
               Math.floor(
                 Math.random() * (props.barMax - props.barMin + 1) + props.barMin
@@ -57,7 +54,7 @@ export default function ChartComponent(props) {
     return () => {
       clearInterval(interval);
     };
-  }, [props.firstValue, props.period]);
+  }, [props.firstValue, props.period, props.barMin]);
 
   return (
     <div>
@@ -84,8 +81,10 @@ export default function ChartComponent(props) {
             maxlength="8"
             size="1"
             value={
-              props.onOrOff
-                ? Math.round(Math.random() * (800 - 200 + 1)) / 100
+              props.onOrOff && props.onOrOff2
+                ? Math.round(
+                    Math.random() * (props.massMin800 - props.massMax200)
+                  ) / 100
                 : 0
             }
           />
@@ -101,10 +100,10 @@ export default function ChartComponent(props) {
             maxlength="8"
             size="1"
             value={
-              props.onOrOff
+              props.onOrOff && props.onOrOff2
                 ? Math.floor(
-                    Math.random() * (props.massMax - props.massMin) +
-                      props.massMin
+                    Math.random() * (props.massMax1 - props.massMin1) +
+                      props.massMin1
                   )
                 : 0
             }

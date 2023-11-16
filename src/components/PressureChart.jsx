@@ -58,7 +58,7 @@ export default function PressureChart(props) {
             maxlength="8"
             size="1"
             value={
-              props.onOrOff
+              props.onOrOff && props.onOrOff1
                 ? Math.floor(
                     Math.random() * (props.massMax - props.massMin) +
                       props.massMin
