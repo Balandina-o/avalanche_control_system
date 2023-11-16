@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../css_components/EconomicModal.module.css";
 
 const EconomicModal = ({ show, onClose, rashody }) => {
   const [resu, setresu] = useState(0);
@@ -30,28 +31,41 @@ const EconomicModal = ({ show, onClose, rashody }) => {
         </Modal.Header>
         <div class="ml-3">Тариф: 0.15 руб./мин.</div>
         <Modal.Body>
-          Выполнить расчет текущих затрат на содержание СРВ:
+          <label for="name">
+            {" "}
+            <b>Выполнить расчет текущих затрат на содержание СРВ:</b>
+          </label>
+
           <Form>
-            <Form.Control
-              type="text"
-              placeholder="Время эксплуатации системы, мин."
-              class="time"
-              value={time}
-              onChange={(event) => setTime(event.target.value)}
-            />
-            <Form.Control
-              type="text"
-              placeholder="Расходы на ремонт оборудования, руб."
-              className="mt-3"
-              value={rashody}
-            />
-            <Form.Control
-              type="text"
-              placeholder="Дополнительные затраты, руб."
-              className="mt-3"
-              value={dop}
-              onChange={(event) => setDop(event.target.value)}
-            />
+            <div class="bruh" style={{ display: "flex" }}>
+              <label for="name">Время эксплуатации системы, мин.:</label>
+              <Form.Control
+                type="text"
+                placeholder="Время эксплуатации системы, мин."
+                class="time"
+                value={time}
+                onChange={(event) => setTime(event.target.value)}
+              />
+            </div>
+            <div class="bruh" style={{ display: "flex" }}>
+              <label for="name">Расходы на ремонт оборудования, руб.</label>
+              <Form.Control
+                type="text"
+                placeholder="Расходы на ремонт оборудования, руб."
+                className="mt-3"
+                value={rashody}
+              />
+            </div>
+            <div class="bruh" style={{ display: "flex" }}>
+              <label for="name">Дополнительные затраты, руб.</label>
+              <Form.Control
+                type="text"
+                placeholder="Дополнительные затраты, руб."
+                className="mt-3"
+                value={dop}
+                onChange={(event) => setDop(event.target.value)}
+              />
+            </div>
             <hr></hr>
             <button type="button" class="btn btn-danger" onClick={count}>
               Выполнить расчет

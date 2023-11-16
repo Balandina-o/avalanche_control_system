@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import Timer from "./Timer";
 import ControlButtons from "./ControlButtons";
 
-const TimeMaster = observer(({ childCallback }) => {
+const TimeMaster = observer((props) => {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
@@ -40,6 +40,10 @@ const TimeMaster = observer(({ childCallback }) => {
     setIsActive(false);
     setTime(0);
   };
+
+  React.useEffect(() => {
+    setIsPaused(!isPaused);
+  }, [props.yagami]);
 
   return (
     <div className="stop-watch pt-4 pl-5">

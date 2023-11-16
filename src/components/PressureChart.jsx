@@ -43,7 +43,7 @@ export default function PressureChart(props) {
           height: 350,
           title: "График: динамика изменения давления снежного пласта, Па.",
           xaxis: { range: [-2, 600], title: "s.", visible: false }, //visible: false
-          yaxis: { range: [-2, count], title: "КПа." },
+          yaxis: { range: [-2, count], title: "КПа./10" },
         }}
       />
       <div class="display-flex flex-direction row ml-5">

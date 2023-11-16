@@ -7,6 +7,7 @@ import EconomicModal from "./EconomicModal";
 import AvalancheModal from "./AvalancheModal";
 import PressureChart from "./PressureChart";
 import TimeMaster from "./TimeMaster";
+import YagamiLightModal from "./YagamiLightModal";
 
 const OperationPanel = observer(() => {
   const [onOrOff, setonOrOff] = useState("true");
@@ -22,8 +23,10 @@ const OperationPanel = observer(() => {
 
   const [showCreateEconomicModal, setShowCreateEconomicModal] = useState();
   const [showCreateAvalancheModal, setShowCreateAvalancheModal] = useState();
+  const [showCreateYagamiLightModal, setShowCreateYagamiLightModal] =
+    useState();
 
-  const [timeAA, setTimeAA] = useState(0);
+  const [yagami, setYagami] = useState(0);
 
   const [massMin, setMassMin] = useState(0);
   const [massMax, setMassMax] = useState(0);
@@ -41,6 +44,7 @@ const OperationPanel = observer(() => {
 
     setMassMin(250);
     setMassMax(300);
+    setYagami(0);
   }
   function avalanche() {
     setFirstValue(50);
@@ -54,6 +58,7 @@ const OperationPanel = observer(() => {
 
     setMassMin(250);
     setMassMax(500);
+    setYagami(0);
   }
 
   function peace() {
@@ -68,6 +73,7 @@ const OperationPanel = observer(() => {
 
     setMassMin(150);
     setMassMax(200);
+    setYagami(0);
   }
 
   function stop() {
@@ -87,10 +93,16 @@ const OperationPanel = observer(() => {
     setPeriod(period + 100);
   }
 
-  function childCallback(data) {
-    console.log("Данные от дочернего компонента:", data);
-  }
+  function yagamilight() {
+    setFirstValue(0);
+    setSecondValue(0);
 
+    setMassMin(0);
+    setMassMax(0);
+    setonOrOff(false);
+    setYagami(1);
+    setShowCreateYagamiLightModal(true);
+  }
   return (
     <div class="main_div d-flex flex-row ">
       <div className="container-fluid h-100">
@@ -156,13 +168,31 @@ const OperationPanel = observer(() => {
                     Экономич. эфф.
                   </button>
                 </li>
+                <li class="nav-item text-white fs-4 mt-5">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={() => setShowCreateEconomicModal(true)}
+                  >
+                    Поломка датчика
+                  </button>
+                </li>
+                <li class="nav-item text-white fs-4 mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={yagamilight}
+                  >
+                    Отключение эл-ва
+                  </button>
+                </li>
               </div>
             </ul>
           </div>
           <div class="temp">
             <div class="abys">
               <div>
-                <TimeMaster childCallback={() => childCallback()} />
+                <TimeMaster yagami={yagami} />
               </div>
               <div>
                 <div class="pl-5 pt-4">
@@ -241,6 +271,13 @@ const OperationPanel = observer(() => {
         >
           {" "}
         </AvalancheModal>
+
+        <YagamiLightModal
+          show={showCreateYagamiLightModal}
+          onClose={() => setShowCreateYagamiLightModal(false)}
+        >
+          {" "}
+        </YagamiLightModal>
       </div>
     </div>
   );
