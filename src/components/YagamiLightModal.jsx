@@ -3,10 +3,11 @@ import { Modal, Button } from "react-bootstrap";
 import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const YagamiLightModal = ({ show, onClose }) => {
+const YagamiLightModal = ({ show, onClose, please }) => {
   //const [a, setA] = useState(1);
 
   function checkStateChange(interval) {
+    please();
     onClose();
     clearInterval(interval);
   }

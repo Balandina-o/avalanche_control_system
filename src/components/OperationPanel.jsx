@@ -46,6 +46,7 @@ const OperationPanel = observer(() => {
     setMassMax(300);
     setYagami(0);
   }
+
   function avalanche() {
     setFirstValue(50);
     setSecondValue(20);
@@ -59,6 +60,12 @@ const OperationPanel = observer(() => {
     setMassMin(250);
     setMassMax(500);
     setYagami(0);
+
+    setTimeout(peace, 9000);
+  }
+
+  function please() {
+    setTimeout(peace, 9000);
   }
 
   function peace() {
@@ -275,6 +282,7 @@ const OperationPanel = observer(() => {
         <YagamiLightModal
           show={showCreateYagamiLightModal}
           onClose={() => setShowCreateYagamiLightModal(false)}
+          please={please}
         >
           {" "}
         </YagamiLightModal>
