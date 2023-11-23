@@ -4,7 +4,6 @@ import OperationPanel from "./components/OperationPanel";
 import LogoBar from "./components/LogoBar";
 import MainPage from "./pages/MainPage";
 import AuthPage from "./pages/AuthPage";
-import ChartComponent from "./components/ChartComponent";
 
 function Edit() {
   return (
@@ -24,7 +23,6 @@ function App() {
           <div>
             <OperationPanel />
           </div>
-
           <Routes>
             <Route path="/" element={<MainPage />}></Route>
             <Route path="/auth" element={<AuthPage />} />
