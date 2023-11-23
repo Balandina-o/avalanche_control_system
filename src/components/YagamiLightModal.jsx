@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css_components/OperationPanel.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const YagamiLightModal = ({ show, onClose, please, periodTimeMass }) => {
-  function checkStateChange(interval) {
-    please();
-    onClose();
-    clearInterval(interval);
-  }
-
   React.useEffect(() => {
     console.log("ready");
 
-    var interval = setInterval(function () {
-      checkStateChange(interval);
-      clearInterval(interval);
+    setTimeout(function () {
+      please();
+      onClose();
     }, 5000);
-  }, [periodTimeMass.length]);
+  }, [please, onClose, periodTimeMass.length]);
 
   return (
     <div>

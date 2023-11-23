@@ -1,5 +1,5 @@
 {
-  "name": "electron",
+  "name": "avalanche_control_system",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,7 +34,7 @@
     "nodemon": "^1.19.1",
     "electron-is-dev": "^1.1.0"
   },
-  "main": "public/main.js",
+  "main": "build/main.js",
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
@@ -56,23 +56,13 @@
   },
   "build": {
     "extends": null,
+    "icon": "build/logo.png",
     "appId": "com.electron-boilerplate",
     "files": [
-      "dist/**/*",
-      "build/**/**/*",
-      "build-server/**/**/*",
+      "build/**/*",
       "node_modules/**/*",
-      "package.json",
-      "public/main.js"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    },
-    "publish": {
-      "provider": "github",
-      "repo": "electron-cra-example",
-      "owner": "johndyer24"
-    }
+      "package.json"
+    ]
   },
   "eslintConfig": {
     "extends": [
